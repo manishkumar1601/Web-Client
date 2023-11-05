@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="center-box">
+        <h1>WhatsApp Verification</h1>
+        <p class="description">Please enter the verification code below:</p>
+        <br><br>
+        <form>
+            <div class="input-group">
+                <label for="verification-code">Verification Code:</label>
+                <input type="tel" id="verification-code" name="verification-code" placeholder="Enter verification code" maxlength="6">
+                <p id="error-message" class="error-message" style="color: red; display: none;">Please fill a valid OTP with 6 digits.</p>
+            </div>
+            <button type="submit" class="verify-button" disabled>Continue</button>
+        </form>
+    </div>
+
+    <script>
+        const verificationCodeInput = document.getElementById("verification-code");
+        const errorMessage = document.getElementById("error-message");
+        const continueButton = document.querySelector(".verify-button");
+
+        verificationCodeInput.addEventListener("input", function() {
+            const inputValue = verificationCodeInput.value;
+            const digitsOnly = inputValue.replace(/\D/g, ''); // Remove non-digits
+            verificationCodeInput.value = digitsOnly;
+
+            if (digitsOnly.length === 6) {
+                continueButton.removeAttribute("disabled");
+                errorMessage.style.display = "none";
+            } else {
+                continueButton.setAttribute("disabled", "disabled");
+                errorMessage.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
